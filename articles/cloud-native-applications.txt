@@ -1,0 +1,3 @@
+Cloud-native applications are built to run on cloud platforms using microservices and containers. 
+They allow scaling, faster development, and resilience. 
+Technologies like Docker and Kubernetes are widely used in cloud-native architectures.

@@ -1,0 +1,3 @@
+Industrial robots are widely used for assembling cars, electronics, and other products. 
+They improve efficiency, reduce errors, and handle dangerous tasks. 
+Collaborative robots, or cobots, are designed to work safely alongside humans.

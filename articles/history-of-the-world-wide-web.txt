@@ -1,0 +1,3 @@
+The World Wide Web was invented by Tim Berners-Lee in 1989. 
+It started as a system to share research documents and grew into the backbone of global communication. 
+The web evolved from static HTML pages to dynamic, interactive platforms powered by JavaScript and cloud technologies.

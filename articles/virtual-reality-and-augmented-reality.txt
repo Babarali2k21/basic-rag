@@ -1,0 +1,3 @@
+Virtual Reality (VR) immerses users in a computer-generated environment, while Augmented Reality (AR) overlays digital content onto the real world. 
+Applications include gaming, medical training, and remote collaboration. 
+The technology is rapidly advancing with lighter headsets and better graphics.

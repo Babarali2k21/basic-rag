@@ -1,0 +1,3 @@
+One of the challenges of renewable energy is storage. 
+Batteries, pumped hydro storage, and hydrogen fuel cells are used to store excess power. 
+Advances in lithium-ion and solid-state batteries are critical for supporting renewable energy growth.

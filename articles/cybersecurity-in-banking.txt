@@ -1,0 +1,3 @@
+Banks face threats from phishing, ransomware, and insider attacks. 
+They implement multi-factor authentication, transaction monitoring, and advanced encryption. 
+Regulators require strict compliance with cybersecurity standards.

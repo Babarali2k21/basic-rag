@@ -1,0 +1,3 @@
+Blockchain is a decentralized ledger system that records transactions securely. 
+Each block contains data, a timestamp, and a cryptographic hash of the previous block. 
+It powers cryptocurrencies like Bitcoin and Ethereum, but also has applications in supply chain, voting, and healthcare.

@@ -1,0 +1,3 @@
+The Internet of Things refers to a network of physical objects embedded with sensors and software to exchange data. 
+IoT enables smart homes, wearable health trackers, and industrial monitoring systems. 
+Security is a major challenge, as billions of devices are interconnected and vulnerable to cyber attacks.

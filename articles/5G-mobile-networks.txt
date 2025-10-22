@@ -1,0 +1,3 @@
+5G is the fifth generation of mobile networks, offering higher speeds and lower latency than 4G. 
+It enables real-time applications like autonomous driving, remote surgery, and smart cities. 
+Deployment is ongoing globally, but concerns exist about infrastructure costs and energy usage.

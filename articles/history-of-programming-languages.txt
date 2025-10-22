@@ -1,0 +1,3 @@
+Early programming languages include Fortran and COBOL. 
+C and C++ introduced structured and object-oriented programming. 
+Later, Python, JavaScript, and Go emerged as popular languages for web, AI, and system development.

@@ -1,0 +1,3 @@
+Artificial Neural Networks were inspired by the structure of the human brain. 
+They gained popularity in the 1980s, declined during the "AI winter," and resurged in the 2010s with deep learning. 
+Today, neural networks power voice recognition, image classification, and autonomous vehicles.
