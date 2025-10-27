@@ -1,3 +1,14 @@
 venv/
 __pycache__/
 .env
+.DS_Store
+*.pyc
+.idea/
+.vscode/
+node_modules/
+dist/
+build/
+*.log
+coverage/
+*.sqlite3
+*.egg-info/               
