@@ -14,12 +14,14 @@ def main():
     chunks = []
     for doc in docs:
         for i, piece in enumerate(loader.spllit_text(doc["text"])): 
-            chunks.append({"id": f"{doc['id']}_chunk{i}", "text": piece})
+            chunks.append({
+                "id": f"{doc['id']}_chunk{i+1}",
+                "text": segment
+            })
 
     # Step 2: Embed docs
     for chunk in chunks:
         chunk["embedding"] = embedder.create(chunk["text"])
-
     vectordb.upsert(chunks)
 
     # Step 3: Ask user
