@@ -2,6 +2,8 @@ from openai import OpenAI
 from config import Config
 
 class RAG:
+    """Retrieval-Augmented Generation pipeline."""
+
     def __init__(self, vector_db):
         self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
         self.vector_db = vector_db
@@ -11,15 +13,18 @@ class RAG:
 
     def generate(self, question, context_chunks):
         context = "\n\n".join(context_chunks)
-        prompt = (
-            "Answer the question concisely using context. "
+        system_prompt = (
+            "You are a helpful assistant. "
+            "Answer concisely using the provided context. "
             "If unsure, say 'I don't know'."
         )
+        user_prompt = f"Context:\n{context}\n\nQuestion:\n{question}"
+
         response = self.client.chat.completions.create(
             model=Config.CHAT_MODEL,
             messages=[
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": question},
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
             ],
         )
-        return response["choices"][0]["message"]["content"]
+        return response.choices[0].message["content"]
