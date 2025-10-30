@@ -1,35 +1,35 @@
-from data_loader import DataLoader
-from embeddings import EmbeddingGenerator
-from vector_store import VectorDB
-from rag import RAG
+from data_loader import load_documents_from_directory, split_text
+from embeddings import get_openai_embedding
+from vector_store import upsert_documents, query_documents
+from rag import generate_response
 
 def main():
-    loader = DataLoader()
-    embedder = EmbeddingGenerator()
-    vectordb = VectorDB()
-    rag = RAG(vectordb)
+    # Load documents
+    documents = load_documents_from_directory("./articles")
+    print(f"Loaded {len(documents)} documents")
 
-    # Step 1: Load docs
-    docs = loader.load_from_folder("articles") 
-    chunks = []
-    for doc in docs:
-        for i, piece in enumerate(loader.spllit_text(doc["text"])): 
-            chunks.append({
-                "id": f"{doc['id']}_chunk{i+1}",
-                "text": segment
-            })
+    # Split into chunks
+    chunked_documents = []
+    for doc in documents:
+        chunks = split_text(doc["text"])
+        for i, chunk in enumerate(chunks):
+            chunked_documents.append({"id": f"{doc['id']}_chunk{i+1}", "text": chunk})
 
-    # Step 2: Embed docs
-    for chunk in chunks:
-        chunk["embedding"] = embedder.create(chunk["text"])
-    vectordb.upsert(chunks)
+    # Embeddings
+    for doc in chunked_documents:
+        doc["embedding"] = get_openai_embedding(doc["text"])
 
-    # Step 3: Ask user
-    question = input("Ask a question: ")
-    relevant = rag.retrieve(question)
-    answer = rag.generate(question, relevant)
+    # Store in DB
+    upsert_documents(chunked_documents)
 
-    print("Answer:", answer)
+    # Interactive query loop
+    while True:
+        question = input("\nAsk a question (or type 'exit' to quit): ")
+        if question.lower() == "exit":
+            break
+        relevant_chunks = query_documents(question)
+        answer = generate_response(question, relevant_chunks)
+        print(f"\n💡 Answer: {answer}\n")
 
 if __name__ == "__main__":
     main()
