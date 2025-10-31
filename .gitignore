@@ -11,4 +11,5 @@ build/
 *.log
 coverage/
 *.sqlite3
-*.egg-info/               
+*.egg-info/
+chroma_persistent_storage/
