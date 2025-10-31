@@ -13,3 +13,6 @@ coverage/
 *.sqlite3
 *.egg-info/
 chroma_persistent_storage/
+.coverage
+coverage.svg
+.github/
