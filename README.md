@@ -41,5 +41,3 @@ The project uses the following Python libraries:
 6. LLM generates an answer using context 
 
 ![Coverage](coverage.svg)
-
-.
