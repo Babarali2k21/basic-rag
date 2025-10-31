@@ -39,3 +39,7 @@ The project uses the following Python libraries:
 4. User asks a question  
 5. Retrieve top matching chunks  
 6. LLM generates an answer using context 
+
+![Coverage](coverage.svg)
+
+.
