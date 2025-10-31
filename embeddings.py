@@ -1,10 +1,12 @@
 from openai import OpenAI
+from config import Config
 
-class EmbeddingGenerator:
-    def __init__(self, model="text-embedding-3-small"):
-        self.client = OpenAI(api_key=Config.OPENAI_API_KEY) 
-        self.model = model
+config = Config()
+client = OpenAI(api_key=config.openai_key)
 
-    def create(self, text):
-        resp = self.client.embeddings.create(model=self.model, text=text)
-        return resp.data[0].embedding
+def get_openai_embedding(text: str):
+    response = client.embeddings.create(
+        input=text,
+        model=config.embedding_model
+    )
+    return response.data[0].embedding
