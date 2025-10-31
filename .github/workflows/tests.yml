@@ -28,13 +28,23 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
+      # ✅ Step 1: Run tests with coverage and generate JUnit results
       - name: Run tests with coverage
         run: |
-          pytest --cov=. --cov-report=xml --cov-report=term-missing
+          pytest --cov=. --cov-report=xml --cov-report=term-missing \
+                 --junitxml=junit.xml -o junit_family=legacy
 
+      # ✅ Step 2: Upload coverage report to Codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
           fail_ci_if_error: true
+
+      # ✅ Step 3: Upload test results for Test Analytics
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
