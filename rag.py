@@ -1,23 +1,21 @@
 from openai import OpenAI
-from config import Config
 
-config = Config()
-client = OpenAI(api_key=config.openai_key)
-
-def generate_response(question: str, relevant_chunks: list):
+def generate_response(question, relevant_chunks, client=None):
+    if client is None:
+        client = OpenAI()
     context = "\n\n".join(relevant_chunks)
     prompt = (
-        "You are an assistant for question-answering tasks. Use the following pieces of "
-        "retrieved context to answer the question. If you don't know the answer, say that you "
-        "don't know. Use three sentences maximum and keep the answer concise."
-        "\n\nContext:\n" + context + "\n\nQuestion:\n" + question
+        "You are an assistant for question-answering tasks. "
+        "Use the following context to answer concisely:\n\n"
+        f"Context:\n{context}\n\nQuestion:\n{question}"
     )
 
     response = client.chat.completions.create(
-        model=config.chat_model,
+        model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": prompt},
-            {"role": "user", "content": question}
+            {"role": "user", "content": question},
         ],
     )
-    return response.choices[0].message.content
+
+    return response.choices[0].message
