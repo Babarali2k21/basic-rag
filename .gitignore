@@ -15,4 +15,3 @@ coverage/
 chroma_persistent_storage/
 .coverage
 coverage.svg
-.github/
