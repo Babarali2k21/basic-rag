@@ -1,5 +1,9 @@
 # Basic RAG (Retrieval-Augmented Generation)
 
+[![CI](https://github.com/Babarali2k21/basic-rag/actions/workflows/tests.yml/badge.svg)](https://github.com/Babarali2k21/basic-rag/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/github/Babarali2k21/basic-rag/graph/badge.svg?token=CDDQYTLPZ9)](https://codecov.io/github/Babarali2k21/basic-rag)
+
+
 ## Overview  
 This project is a simple **Python implementation of Retrieval-Augmented Generation (RAG)**.  
 It demonstrates how to:  
@@ -39,5 +43,3 @@ The project uses the following Python libraries:
 4. User asks a question  
 5. Retrieve top matching chunks  
 6. LLM generates an answer using context 
-
-![Coverage](coverage.svg)
