@@ -1,35 +1,73 @@
-from data_loader import load_documents_from_directory, split_text
-from embeddings import get_openai_embedding
-from vector_store import upsert_documents, query_documents
-from rag import generate_response
+"""
+basic-rag CLI
+─────────────
+Usage:
+    python main.py --index          # Index documents in ./articles
+    python main.py                  # Interactive Q&A (uses existing index)
+    python main.py --query "..."    # Single question, then exit
+"""
 
-def main():
-    # Load documents
-    documents = load_documents_from_directory("./articles")
-    print(f"Loaded {len(documents)} documents")
+import argparse
 
-    # Split into chunks
-    chunked_documents = []
-    for doc in documents:
-        chunks = split_text(doc["text"])
-        for i, chunk in enumerate(chunks):
-            chunked_documents.append({"id": f"{doc['id']}_chunk{i+1}", "text": chunk})
+from data_loader import load_documents, split_documents
+from vector_store import build_vector_store, load_vector_store, get_retriever
+from rag import build_rag_chain, ask
 
-    # Embeddings
-    for doc in chunked_documents:
-        doc["embedding"] = get_openai_embedding(doc["text"])
 
-    # Store in DB
-    upsert_documents(chunked_documents)
+def index_documents() -> None:
+    docs = load_documents()
+    chunks = split_documents(docs)
+    build_vector_store(chunks)
+    print("\n✅ Indexing complete. Run `python main.py` to start Q&A.\n")
 
-    # Interactive query loop
+
+def run_interactive(query: str | None = None) -> None:
+    vector_store = load_vector_store()
+    retriever = get_retriever(vector_store)
+    chain = build_rag_chain(retriever)
+
+    def _answer(question: str) -> None:
+        result = ask(question, retriever, chain)
+        print(f"\n💡 Answer:\n{result.answer}")
+        if result.sources:
+            print(f"\n📄 Sources: {', '.join(result.sources)}")
+        print(f"   Chunks used: {result.num_chunks_used}\n")
+
+    if query:
+        _answer(query)
+        return
+
+    print("\n🤖 RAG Q&A ready. Type your question or 'exit' to quit.\n")
     while True:
-        question = input("\nAsk a question (or type 'exit' to quit): ")
-        if question.lower() == "exit":
+        question = input("Question: ").strip()
+        if not question:
+            continue
+        if question.lower() in {"exit", "quit"}:
+            print("Goodbye!")
             break
-        relevant_chunks = query_documents(question)
-        answer = generate_response(question, relevant_chunks)
-        print(f"\n💡 Answer: {answer}\n")
+        _answer(question)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="basic-rag CLI")
+    parser.add_argument(
+        "--index",
+        action="store_true",
+        help="Index documents from ./articles before querying",
+    )
+    parser.add_argument(
+        "--query",
+        type=str,
+        default=None,
+        help="Ask a single question and exit",
+    )
+    args = parser.parse_args()
+
+    if args.index:
+        index_documents()
+    else:
+        run_interactive(query=args.query)
+
 
 if __name__ == "__main__":
     main()
