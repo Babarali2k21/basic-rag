@@ -1,0 +1,7 @@
+Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with a retrieval system. Instead of relying solely on knowledge baked into the model's parameters during training, a RAG system dynamically fetches relevant information from an external knowledge base at inference time.
+
+A RAG system consists of three main components: a knowledge base of documents, a retriever that finds relevant chunks via vector similarity search, and a generator (LLM) that produces answers grounded in the retrieved context.
+
+Benefits include reduced hallucination, up-to-date knowledge without retraining, source attribution, and cost-effectiveness compared to fine-tuning.
+
+Vector databases like ChromaDB, Pinecone, and Qdrant store document embeddings and enable fast semantic search. Evaluation frameworks like RAGAS measure faithfulness, answer relevancy, context precision, and context recall.
