@@ -1,4 +1,4 @@
-# 🤖 DocChat — Production RAG Pipeline
+# DocChat — Production RAG Pipeline
 
 [![CI](https://github.com/Babarali2k21/basic-rag/actions/workflows/tests.yml/badge.svg)](https://github.com/Babarali2k21/basic-rag/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/github/Babarali2k21/basic-rag/graph/badge.svg?token=CDDQYTLPZ9)](https://codecov.io/github/Babarali2k21/basic-rag)
@@ -10,7 +10,7 @@
 
 > Upload `.txt` or `.pdf` documents, ask questions in plain English, get grounded answers with source citations — powered by Retrieval-Augmented Generation.
 
-**[🚀 Live Demo → basic-rag-mstghx3dbkhezdategemlv.streamlit.app](https://basic-rag-mstghx3dbkhezdategemlv.streamlit.app)**
+**[Live Demo → basic-rag-mstghx3dbkhezdategemlv.streamlit.app](https://basic-rag-mstghx3dbkhezdategemlv.streamlit.app)**
 
 ---
 
@@ -30,7 +30,7 @@ Evaluated on a QA dataset over the included articles (`python evaluate.py`):
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 User Question
@@ -70,7 +70,7 @@ User Question
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone and install
 
@@ -124,7 +124,7 @@ python evaluate.py
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 basic-rag/
@@ -151,7 +151,7 @@ basic-rag/
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 All settings via `.env` file:
 
@@ -168,7 +168,7 @@ All settings via `.env` file:
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ```bash
 pytest tests/ -v
@@ -183,7 +183,7 @@ All tests use mocked LLM calls — **no API key required** to run the test suite
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [x] Core RAG pipeline (load → chunk → embed → retrieve → generate)
 - [x] PDF support via PyPDF
@@ -202,7 +202,7 @@ All tests use mocked LLM calls — **no API key required** to run the test suite
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Tool |
 |---|---|
@@ -219,15 +219,15 @@ All tests use mocked LLM calls — **no API key required** to run the test suite
 
 ---
 
-## 👤 Author
+## Author
 
-**Babar Ali** — AI Engineer · Vienna, Austria
+**Babar Ali**  AI Engineer · Vienna, Austria
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-babarali2k21-0A66C2?logo=linkedin)](https://linkedin.com/in/babarali2k21)
 [![GitHub](https://img.shields.io/badge/GitHub-Babarali2k21-181717?logo=github)](https://github.com/Babarali2k21)
 
 ---
 
-## 📄 License
+## License
 
 MIT
