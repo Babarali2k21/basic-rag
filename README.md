@@ -1,4 +1,4 @@
-# DocChat — Production RAG Pipeline
+# DocChat (Production RAG Pipeline)
 
 [![CI](https://github.com/Babarali2k21/basic-rag/actions/workflows/tests.yml/badge.svg)](https://github.com/Babarali2k21/basic-rag/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/github/Babarali2k21/basic-rag/graph/badge.svg?token=CDDQYTLPZ9)](https://codecov.io/github/Babarali2k21/basic-rag)
@@ -8,14 +8,14 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-UI-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io)
 [![RAGAS](https://img.shields.io/badge/Evaluated-RAGAS-7C3AED)](https://docs.ragas.io)
 
-> Upload `.txt` or `.pdf` documents, ask questions in plain English, get grounded answers with source citations — powered by Retrieval-Augmented Generation.
+> Upload `.txt` or `.pdf` documents, ask questions in plain English.
 
 **[Live Demo → basic-rag-mstghx3dbkhezdategemlv.streamlit.app](https://basic-rag-mstghx3dbkhezdategemlv.streamlit.app)**
 
 ---
 
 
-## 📊 Evaluation Results (RAGAS)
+## Evaluation Results (RAGAS)
 
 Evaluated on a QA dataset over the included articles (`python evaluate.py`):
 
@@ -177,7 +177,7 @@ pytest tests/ -v
 pytest tests/ -v --cov=. --cov-report=term-missing
 ```
 
-All tests use mocked LLM calls — **no API key required** to run the test suite.
+All tests use mocked LLM calls **no API key required** to run the test suite.
 
 **12/12 tests passing on Python 3.11 and 3.12.**
 
