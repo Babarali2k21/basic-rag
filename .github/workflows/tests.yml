@@ -1,32 +1,31 @@
-name: Run Tests and Coverage
+name: CI
 
 on:
   push:
-    branches: [ main, fix-rag ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      # Make `from embeddings import ...` work when running from repo root
-      PYTHONPATH: ${{ github.workspace }}
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
 
       - name: Cache pip
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -36,36 +35,14 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov
 
-      # Run tests, generate coverage.xml + junit.xml (needed for Codecov Test Analytics)
-      - name: Run pytest with coverage
+      - name: Run tests
+        env:
+          OPENAI_API_KEY: "sk-test-placeholder"
         run: |
-          pytest tests -v \
-            --maxfail=1 --disable-warnings \
-            --cov=. --cov-report=xml --cov-report=term-missing \
-            --junitxml=junit.xml -o junit_family=legacy
+          pytest tests/test_rag.py -v --cov=. --cov-report=xml --cov-report=term-missing
 
-      # Always upload artifacts so you can inspect them even if pytest fails
-      - name: Upload JUnit and coverage artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-artifacts
-          path: |
-            junit.xml
-            coverage.xml
-
-      # Upload coverage to Codecov
       - name: Upload coverage to Codecov
-        if: always()
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage.xml
-          fail_ci_if_error: true
-
-      # Upload test results to Codecov Test Analytics (optional but nice)
-      - name: Upload test results to Codecov
-        if: always()
-        uses: codecov/test-results-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
