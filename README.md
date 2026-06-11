@@ -43,28 +43,28 @@ User Question
       ┌────────────┴────────────┐
       ▼                         ▼
 ┌──────────────┐      ┌──────────────────────┐
-│ data_loader  │      │    vector_store       │
-│              │      │                       │
-│ .txt + .pdf  ├─────▶│  OpenAI Embeddings    │
-│ LangChain    │chunks│  ChromaDB (persisted) │
-│ TextSplitter │      │  Similarity search    │
+│ data_loader  │      │    vector_store      │
+│              │      │                      │
+│ .txt + .pdf  ├─────▶│  OpenAI Embeddings   │
+│ LangChain    │chunks│ ChromaDB (persisted) │
+│ TextSplitter │      │  Similarity search   │
 └──────────────┘      └──────────┬───────────┘
-                                 │  top-k chunks
+                                 │ top-k chunks
                                  ▼
                       ┌──────────────────────┐
-                      │       rag.py          │
-                      │                       │
-                      │  LangChain LCEL chain │
-                      │  GPT-4o-mini          │
-                      │  Source citations     │
+                      │       rag.py         │
+                      │                      │
+                      │ LangChain LCEL chain │
+                      │  GPT-4o-mini         │
+                      │  Source citations    │
                       └──────────┬───────────┘
                                  │
                                  ▼
                       ┌──────────────────────┐
-                      │     RAGResponse       │
-                      │  answer: str          │
-                      │  sources: list[str]   │
-                      │  num_chunks_used: int │
+                      │     RAGResponse      │
+                      │  answer: str         │
+                      │  sources: list[str]  │
+                      │ num_chunks_used: int │
                       └──────────────────────┘
 ```
 
